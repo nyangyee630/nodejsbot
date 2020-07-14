@@ -17,8 +17,9 @@ client.on('ready', () => {
 
   let state_list = [
     '!help를 쳐보세요.',
-    '메렁메렁',
+    '심심해',
     '에베베베베',
+    '뭐시 중헌디'
   ]
   let state_list_index = 1;
   let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
@@ -251,7 +252,7 @@ client.on('message', (message) => {
     if(isNum && (clearLine <= 0 || 100 < clearLine)) {
       message.channel.send("1부터 100까지의 숫자만 입력해주세요.")
       return;
-    } else if(!isNum) { // c @나긋해 3
+    } else if(!isNum) { // c @냥이 3
       if(message.content.split('<@').length == 2) {
         if(isNaN(message.content.split(' ')[2])) return;
 
@@ -306,7 +307,7 @@ client.on('message', (message) => {
     let min = 1;
     let max = 6;
     let dice_num = parseInt(Math.random() * (max - min) + min);
-    return message.reply(`${dice_num}(이)가 나왔습니다.`);
+    return message.reply(`${dice_num}가 나왔습니다.`);
   } else if(message.content.startsWith('!야')) {
     let arr = [
       '왜',
@@ -317,7 +318,7 @@ client.on('message', (message) => {
     let min = 0;
     let max = arr.length;
     let index = parseInt(Math.random() * (max - min) + min);
-    return message.channel.send`${arr[index]}가 나왔습니다.`)
+    return message.reply(`${arr[index]}`);
   }
 });
 
