@@ -307,7 +307,7 @@ client.on('message', (message) => {
     let min = 1;
     let max = 6;
     let dice_num = parseInt(Math.random() * (max - min) + min);
-    return message.reply(`${dice_num}가 나왔습니다.`);
+    return message.reply(`${dice_num}(이)가 나왔습니다.`);
   } else if(message.content.startsWith('!야')) {
     let arr = [
       '왜',
