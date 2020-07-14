@@ -9,6 +9,7 @@ const welcomeChannelName = "안녕하세요";
 const byeChannelName = "안녕히가세요";
 const welcomeChannelComment = "어서오세요.";
 const byeChannelComment = "안녕히가세요.";
+const adminUserId = 250693463065100298;
 
 client.on('ready', () => {
   console.log('켰다.');
@@ -24,7 +25,7 @@ client.on('ready', () => {
 
   function changeState() {
     setTimeout(() => {
-      console.log( '상태 변경 -> ', state_list[state_list_index] );
+      // console.log( '상태 변경 -> ', state_list[state_list_index] );
       client.user.setPresence({ game: { name: state_list[state_list_index] }, status: 'online' })
       state_list_index += 1;
       if(state_list_index >= state_list.length) {
@@ -34,7 +35,7 @@ client.on('ready', () => {
     }, change_delay);
   }
 
-  changeState();
+  // changeState();
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -62,6 +63,26 @@ client.on("messageUpdate", (message) => {
 client.on('message', (message) => {
   MessageSave(message)
   if(message.author.bot) return;
+
+  if(message.channel.type == 'dm') {
+    if(message.author.id == adminUserId) return;
+
+    /* not use embed */
+    let msg = message.author+'이(가) 메세지를 보냈습니다.\n'+message.content;
+    client.users.find(x => x.id == adminUserId).send(msg)
+
+    // /* use embed */
+    // let embed = new Discord.RichEmbed()
+    // let img = message.author.avatar ? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.webp?size=256` : undefined;
+    // let user = message.author.username+'#'+message.author.discriminator
+    // let msg = message.content;
+    // embed.setColor('#186de6')
+    // embed.setAuthor(user+'이(가) 메세지를 보냈습니다.', img)
+    // embed.setFooter(`콜라곰 BOT ❤️`)
+    // embed.addField('메세지 내용', msg, true);
+    // embed.setTimestamp()
+    // client.users.find(x => x.id == adminUserId).send(embed);
+  }
 
   if(message.content.startsWith('!역할추가')) {
     if(message.channel.type == 'dm') {
@@ -255,6 +276,32 @@ client.on('message', (message) => {
         })
         .catch(console.error)
     }
+  } else if(message.content.startsWith('!강퇴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+    
+    message.member.guild.members.find(x => x.id == userId).kick(kick_msg)
+  } else if(message.content.startsWith('!밴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+
+    message.member.guild.members.find(x => x.id == userId).ban(kick_msg)
   }
 });
 
