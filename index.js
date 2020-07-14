@@ -78,7 +78,7 @@ client.on('message', (message) => {
     // let msg = message.content;
     // embed.setColor('#186de6')
     // embed.setAuthor(user+'이(가) 메세지를 보냈습니다.', img)
-    // embed.setFooter(`콜라곰 BOT ❤️`)
+    // embed.setFooter(`냥냥봇 BOT ❤️`)
     // embed.addField('메세지 내용', msg, true);
     // embed.setTimestamp()
     // client.users.find(x => x.id == adminUserId).send(embed);
@@ -109,8 +109,8 @@ client.on('message', (message) => {
     let img = 'https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256';
     var duration = moment.duration(client.uptime).format(" D [일], H [시간], m [분], s [초]");
     embed.setColor('#186de6')
-    embed.setAuthor('server info of 콜라곰 BOT', img)
-    embed.setFooter(`콜라곰 BOT ❤️`)
+    embed.setAuthor('server info of 냥냥봇 BOT', img)
+    embed.setFooter(`냥냥봇 BOT ❤️`)
     embed.addBlankField()
     embed.addField('RAM usage',    `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`, true);
     embed.addField('running time', `${duration}`, true);
@@ -140,7 +140,7 @@ client.on('message', (message) => {
     let embed = new Discord.RichEmbed()
       .setTitle('타이틀')
       .setURL('http://www.naver.com')
-      .setAuthor('나긋해', img, 'http://www.naver.com')
+      .setAuthor('냥이', img, 'http://www.naver.com')
       .setThumbnail(img)
       .addBlankField()
       .addField('Inline field title', 'Some value here')
@@ -150,7 +150,7 @@ client.on('message', (message) => {
       .addField('Inline field title', 'Some value here1\nSome value here2\nSome value here3\n')
       .addBlankField()
       .setTimestamp()
-      .setFooter('나긋해가 만듬', img)
+      .setFooter('냥이가 만듬', img)
 
     message.channel.send(embed)
   } else if(message.content == '!help') {
@@ -167,9 +167,9 @@ client.on('message', (message) => {
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
-      .setAuthor('Help of 콜라곰 BOT', helpImg)
+      .setAuthor('Help of 냥냥봇 BOT', helpImg)
       .setColor('#186de6')
-      .setFooter(`콜라곰 BOT ❤️`)
+      .setFooter(`냥냥봇 BOT ❤️`)
       .setTimestamp()
     
     commandList.forEach(x => {
@@ -209,9 +209,9 @@ client.on('message', (message) => {
     if(message.member != null) { // 채널에서 공지 쓸 때
       let contents = message.content.slice('!전체공지2'.length);
       let embed = new Discord.RichEmbed()
-        .setAuthor('공지 of 콜라곰 BOT')
+        .setAuthor('공지 of 냥냥봇 BOT')
         .setColor('#186de6')
-        .setFooter(`콜라곰 BOT ❤️`)
+        .setFooter(`냥냥봇 BOT ❤️`)
         .setTimestamp()
   
       embed.addField('공지: ', contents);
@@ -312,11 +312,12 @@ client.on('message', (message) => {
       '왜',
       '뭐',
       '뭠마',
+      '뭐시 중헌디',
     ]
     let min = 0;
     let max = arr.length;
     let index = parseInt(Math.random() * (max - min) + min);
-    return message.reply(`${arr[index]}가 나왔습니다.`);
+    return message.reply(`${arr[index]}`);
   }
 });
 
